@@ -169,7 +169,7 @@ class com_article_image
     #article-file-reset {visibility:hidden}
     #article-file-container p, #article-file-select p {display:inline-block}
     #article-file-input {height: 100%; width: 100%; z-index: 50; position: absolute; opacity: 0}
-    #article-file-drop>div.txp-form-field-value {position: relative; background: white; outline: 1px solid #e3e3e3; min-height: 5ex}
+    #article-file-drop>div.txp-form-field-value {position: relative; outline: 1px solid #e3e3e3; min-height: 5ex; overflow:hidden; text-align:center}
     #main_content {position:sticky;top:0}
     .hidden {display:none}
 </style>
@@ -491,11 +491,11 @@ EOJS
             'article-file-input',
             '<button id="article-file-reset" class="destroy"><span class="ui-icon ui-icon-close">'.gTxt('delete').'</span></button>'.n.
             '<input id="article-file-input" type="file" name="article_file[]" multiple="multiple" accept="image/*" onchange="comArticleImagePreview(this)" />'
-            .'<p>'.gTxt('com_article_image_dropzone').'</p>'.n
+            .'<p class="secondary-text">'.gTxt('com_article_image_dropzone').'</p>'.n
             .'<div id="article-file-preview"></div>'.n, gTxt('upload'),
             array('', 'instructions_article_image'),
             array('id' => 'article-file-drop', 'class' => 'txp-form-field article-image')
-        ).n.'<hr />'.n.$select_images;
+        ).n.$select_images;
     }
 
     /**
