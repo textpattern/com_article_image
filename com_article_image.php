@@ -305,7 +305,7 @@ $("#txp-image-group-content").on("click", "#article-file-reset", function(e) {
 }).on("click", "#article-file-add", function(e) {
     e.preventDefault();
     $(this).children("span").toggleClass("ui-icon-arrowthickstop-1-s ui-icon-arrowthickstop-1-n");
-    $("#article-file-select").toggleClass("hidden");
+    $("#article-file-select").toggle();
 }).on("dragstart", "#article-file-container a, #article-file-select a", function(e) {
 //      console.log(e.originalEvent)
       var dragged = e.originalEvent.dataTransfer.getData("text/html") || e.originalEvent.target;
