@@ -171,7 +171,6 @@ class com_article_image
     #article-file-input {height: 100%; width: 100%; z-index: 50; position: absolute; opacity: 0}
     #article-file-drop>div.txp-form-field-value {position: relative; outline: 1px solid #e3e3e3; min-height: 5ex; overflow:hidden; text-align:center}
     #main_content {position:sticky;top:0}
-    .hidden {display:none}
 </style>
 EOCSS;
     }
@@ -305,7 +304,6 @@ $("#txp-image-group-content").on("click", "#article-file-reset", function(e) {
 }).on("click", "#article-file-add", function(e) {
     e.preventDefault();
     $(this).children("span").toggleClass("ui-icon-arrowthickstop-1-s ui-icon-arrowthickstop-1-n");
-    $("#article-file-select").toggle();
 }).on("dragstart", "#article-file-container a, #article-file-select a", function(e) {
 //      console.log(e.originalEvent)
       var dragged = e.originalEvent.dataTransfer.getData("text/html") || e.originalEvent.target;
@@ -481,10 +479,21 @@ EOJS
                 .'</a><button class="destroy"><span class="ui-icon ui-icon-close">'.gTxt('delete').'</span></button></p>';
         }
 
-        $select_images = '<p class="txp-actions">'
-            .'<a id="article-file-add" href="#article-file-select"><span class="ui-icon ui-icon-arrowthickstop-1-s"></span>'.n.gTxt('add')
-            .'</a></p>'.n
-        .'<div id="article-file-select" class="hidden">'.implode(n, $images).'</div>'.n;
+        $pane = $this->event.'_add';
+        $addTwisty = href('<span class="ui-icon ui-icon-arrowthickstop-1-s"></span>'.n.gTxt('add'),
+            '#article-file-select',
+            array(
+                'id'             => 'article-file-add',
+                'role'           => 'button',
+                'data-txp-token' => md5($pane.$evt.form_token().get_pref('blog_uid')),
+                'data-txp-pane'  => $pane,
+            )
+        );
+
+        $select_images = graf($addTwisty, array(
+            'class' => 'txp-actions txp-summary'
+        )).n
+        .'<div id="article-file-select" style="display:none">'.implode(n, $images).'</div>'.n;
 
         return $data.n.$article_image.n.'<hr />'.n
         .inputLabel(
