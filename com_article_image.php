@@ -482,8 +482,8 @@ EOJS
         }
 
         $select_images = '<p class="txp-actions">'
-            .'<a id="article-file-add" href="#article-file-select">'.gTxt('add')
-            .'<span class="ui-icon ui-icon-arrowthickstop-1-s"></span></a></p>'.n
+            .'<a id="article-file-add" href="#article-file-select"><span class="ui-icon ui-icon-arrowthickstop-1-s"></span>'.n.gTxt('add')
+            .'</a></p>'.n
         .'<div id="article-file-select" class="hidden">'.implode(n, $images).'</div>'.n;
 
         return $data.n.$article_image.n.'<hr />'.n
