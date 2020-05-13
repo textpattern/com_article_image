@@ -165,6 +165,8 @@ class com_article_image
     #txp-image-group-content .sortable {position:relative}
     #txp-image-group-content .destroy {position:absolute;right:0;z-index:100;visibility:hidden}
     #txp-image-group-content .sortable .destroy {visibility:visible}
+    #txp-image-group-content .txp-summary a:before {content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 12h8v2H4zm4-1l5-5h-3V2H6v4H3z'/%3E%3C/svg%3E");display:inline-block;width:13px;}
+    #txp-image-group-content .txp-summary.expanded a:before {content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 2h8v2H4zm4 3l-5 5h3v4h4v-4h3z'/%3E%3C/svg%3E");}
     #article-file-reset {visibility:hidden}
     #article-file-container, #article-file-select {display:flex; flex-wrap:wrap;}
     #article-file-container p, #article-file-select p {margin: 0.15rem;}
@@ -303,7 +305,6 @@ $("#txp-image-group-content").on("click", "#article-file-reset", function(e) {
     $("#txp-image-group-content").trigger("sortupdate").sortable("refresh");
 }).on("click", "#article-file-add", function(e) {
     e.preventDefault();
-    $(this).children("span").toggleClass("ui-icon-arrowthickstop-1-s ui-icon-arrowthickstop-1-n");
 }).on("dragstart", "#article-file-container a, #article-file-select a", function(e) {
 //      console.log(e.originalEvent)
       var dragged = e.originalEvent.dataTransfer.getData("text/html") || e.originalEvent.target;
@@ -480,15 +481,12 @@ EOJS
         }
 
         $pane = $this->event.'_add';
-        $addTwisty = href('<span class="ui-icon ui-icon-arrowthickstop-1-s"></span>'.n.gTxt('add'),
-            '#article-file-select',
-            array(
-                'id'             => 'article-file-add',
-                'role'           => 'button',
-                'data-txp-token' => md5($pane.$evt.form_token().get_pref('blog_uid')),
-                'data-txp-pane'  => $pane,
-            )
-        );
+        $addTwisty = href(gTxt('add'), '#article-file-select', array(
+            'id'             => 'article-file-add',
+            'role'           => 'button',
+            'data-txp-token' => md5($pane.$evt.form_token().get_pref('blog_uid')),
+            'data-txp-pane'  => $pane,
+        ));
 
         $select_images = graf($addTwisty, array(
             'class' => 'txp-actions txp-summary'
@@ -550,6 +548,56 @@ if (0) {
 h1. Overview
 
 Assists with article image management on the @Write@ panel.
+
+Features:
+
+* Drag/drop images from your computer into the Article image dropzone to add them to the article on save.
+* Click thumbnails to add images from those already uploaded to Textpattern's Images panel.
+* Drag/drop images from your computer or another web page directly into your article body text.
+* Control how the images are inserted when dragged - as Textile, as a @<txp:image />@ or as an @<img>@ tag.
+* Reorder article images via drag/drop.
+
+h2. Requirements
+
+Textpattern 4.8.0+
+
+h2. Installation
+
+Download and copy the plugin code to the plugin installer textarea. Install and verify to begin the automatic setup. After activating the plugin, you will see the interface elements in the Article image subpanel of the Write panel.
+
+h2. Configuration
+
+The plugin exposes the following settings for each user independently via the Admin->Preferences->Article image helper:
+
+* *Maximum number of images*: the maximum number of thumbnails to display on the Add subpanel.
+* *Internal image format*: how images will be inserted into the textarea fields when dragged/dropped from your computer or from images that are already uploaded to the Images panel. See below for dynamic replacement tags that can be used. Examples: @!{src}!@, @<txp:image id="{#}" />@ or @<txp:images id="{##}" form="gallery" />@
+* *External image format*: how images will be inserted into the textarea fields when dragged/dropped from other web pages. See below for dynamic replacement tags that can be used. Example: @<img src="{src}" srcset="{srcset}" sizes="{sizes}" height="{h}" width="{w}" alt="{alt}" />@
+
+h3. Dynamic replacement tags
+
+When designing your drog/drop insertion tags, you can use any of the following replacements to inject that value into the formatting template:
+
+h4. Internal-only formatting tags
+
+* @{#}@: The ID of the image.
+* @{##}@: The ID of each image in a set from the @<txp:images />@ tag.
+
+h4. External-only formatting tags
+
+* @{srcset}@: The 'srcset' attribute from the dragged image.
+* @{sizes}@: The 'sizes' attribute from the dragged image.
+
+h4. Tags available for both internal and external formats
+
+* @{src}@: The src URL of the image.
+* @{alt}@: The alt text of the image.
+* @{title}@: The title (caption) text of the image.
+* @{h}@: The height of the image.
+* @{w}@: The width of the image.
+
+h2. Usage
+
+TBD.
 
 # --- END PLUGIN HELP ---
 -->
