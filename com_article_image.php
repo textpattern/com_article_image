@@ -166,7 +166,8 @@ class com_article_image
     #txp-image-group-content .destroy {position:absolute;right:0;z-index:100;visibility:hidden}
     #txp-image-group-content .sortable .destroy {visibility:visible}
     #article-file-reset {visibility:hidden}
-    #article-file-container p, #article-file-select p {display:inline-block}
+    #article-file-container, #article-file-select {display:flex; flex-wrap:wrap;}
+    #article-file-container p, #article-file-select p {margin: 0.15rem;}
     #article-file-input {height: 100%; width: 100%; z-index: 50; position: absolute; opacity: 0}
     #article-file-drop>div.txp-form-field-value {position: relative; outline: 1px solid #e3e3e3; min-height: 5ex; overflow:hidden; text-align:center}
     #main_content {position:sticky;top:0}
