@@ -103,7 +103,6 @@ class com_article_image
 
         register_callback(array($this, 'prefs'), 'plugin_prefs.'.$this->event);
         register_callback(array($this, 'install'), 'plugin_lifecycle.'.$this->event);
-        register_callback(array($this, 'head'), 'admin_side', 'head_end');
 
         if ($event === 'article' && has_privs('image.edit.own')) {
             register_callback(array($this, 'upload'), 'article_ui', 'article_image');
