@@ -1,0 +1,16 @@
+{
+  "name": "textpattern/com_article_image",
+  "description": "Article image helper on Textpattern's Write panel",
+  "keywords": ["textpattern", "plugin", "images", "img", "src", "upload", "src-set", "write", "manage", "insert", "drag/drop"],
+  "homepage": "https://github.com/textpattern/com_article_image",
+  "license": "GPL-2.0",
+  "type": "textpattern-plugin",
+  "support": {
+    "issues": "https://github.com/textpattern/com_article_image/issues",
+    "source": "https://github.com/textpattern/com_article_image"
+  },
+  "require": {
+    "textpattern/lock": ">=4.8.0",
+    "textpattern/installer": "*"
+  }
+}
