@@ -142,6 +142,18 @@ class com_article_image
     }
 
     /**
+     * Redirect to the preferences panel
+     */
+    public function prefs()
+    {
+        header('Location: ?event=prefs#prefs_group_com_article_image');
+        echo
+            '<p id="message">'.n.
+            '   <a href="?event=prefs#prefs_group_com_article_image">'.gTxt('continue').'</a>'.n.
+            '</p>';
+    }
+
+    /**
      * Inject style rules.
      *
      * @return string CSS style block
@@ -394,7 +406,7 @@ EOJS
     }
 
     /**
-     * Send script response after each upload complete
+     * Send script response after each upload completes
      *
      * @param string $evt Admin-side event
      * @param string $stp Admin-side step
@@ -417,7 +429,7 @@ EOJS
     }
 
     /**
-     * Alter the upload form markup to include the image thumbs
+     * Alter the upload form markup to include the image thumbs and dropzone
      *
      * @param  string $evt  Admin-side event
      * @param  string $stp  Admin-side step
