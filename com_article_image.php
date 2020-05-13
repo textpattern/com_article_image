@@ -165,13 +165,13 @@ class com_article_image
     #txp-image-group-content .sortable {position:relative}
     #txp-image-group-content .destroy {position:absolute;right:0;z-index:100;visibility:hidden}
     #txp-image-group-content .sortable .destroy {visibility:visible}
-    #txp-image-group-content .txp-summary a:before {content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 12h8v2H4zm4-1l5-5h-3V2H6v4H3z'/%3E%3C/svg%3E");display:inline-block;width:13px;}
-    #txp-image-group-content .txp-summary.expanded a:before {content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 2h8v2H4zm4 3l-5 5h3v4h4v-4h3z'/%3E%3C/svg%3E");}
+    #txp-image-group-content .txp-summary a:before {content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 12h8v2H4zm4-1l5-5h-3V2H6v4H3z'/%3E%3C/svg%3E");display:inline-block;width:13px}
+    #txp-image-group-content .txp-summary.expanded a:before {content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23333' d='M4 2h8v2H4zm4 3l-5 5h3v4h4v-4h3z'/%3E%3C/svg%3E")}
     #article-file-reset {visibility:hidden}
-    #article-file-container, #article-file-select {display:flex; flex-wrap:wrap;}
-    #article-file-container p, #article-file-select p {margin: 0.15rem;}
+    #article-file-container, #article-file-select {display:flex; flex-wrap:wrap}
+    #article-file-container p, #article-file-select p {margin: 0.15rem}
     #article-file-input {height: 100%; width: 100%; z-index: 50; position: absolute; opacity: 0}
-    #article-file-drop>div.txp-form-field-value {position: relative; outline: 1px solid #e3e3e3; min-height: 5ex; overflow:hidden;}
+    #article-file-drop>div.txp-form-field-value {position: relative; outline: 1px solid #e3e3e3; min-height: 5ex; overflow:hidden}
     #article-file-drop p {text-align:center}
     #main_content {position:sticky;top:0}
 </style>
@@ -598,7 +598,21 @@ h4. Tags available for both internal and external formats
 
 h2. Usage
 
-TBD.
+Twist open the Article image area of the Write panel. If you have any image IDs in the Article image box, their corresponding thumbnails will be displayed beneath in a grid. You may
+
+* drag and drop these thumbnails to reorder the images.
+* click the 'x' icon over the thumbnail to remove it. It won't be deleted form the database, just taken out of the list.
+* click the main portion of the image to jump to the Image edit panel to make changes to it.
+
+Beneath the set of article images is an upload dropzone. Click this to browse your computer for images to upload and assign to the article image field when the article is saved. Alternatively, drag and drop images from your computer to this zone and they will be uploaded when the article is saved.
+
+Below the upload dropzone is an 'Add' link. Click this to reveal a set of images that have already been uploaded to Textpattern's Content->Images panel. Click any image in this set to add it to the list of article image IDs associated with the article. Notice that if you click the 'x' to remove an image from those already associated with the article, it will return to the set beneath the Add link.
+
+You may also drag and drop any of these thumbnails into your Body or Excerpt textareas. The selected image tag(s) will be inserted in the textarea wherever you drop them. If you drag images from your computer directly into the textarea, you will be prompted if you wish to continue. Confirm to upload the images immediately to Textpattern and insert them at the dropped point in the text.
+
+The format of the tags that are injected into your content by dragging from the 'Add' area or from your computer is governed by the 'Internal image format' preference, described above.
+
+Images from other websites (for example search engines) can also be dragged and dropped directly into your Body or Excerpt textareas. The selected image tag(s) will be inserted in the textarea wherever you drop them. The format of the tags that are injected into your content is governed by the 'External image format' preference, described above.
 
 # --- END PLUGIN HELP ---
 -->
