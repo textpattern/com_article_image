@@ -216,7 +216,7 @@ function readfiles(files, input) {
 var formData = new FormData(), count = 0;
 
 for (var i = 0; i < files.length; i++) {
-    if (files[i].type.match(/^image\//)) {
+    if (files[i].type.match(/^image\//) && files[i].size <= textpattern.prefs.max_file_size) {
         formData.append("thefile[]", files[i]);
         count++;
     }
@@ -393,8 +393,14 @@ window.comArticleImagePreview = function (input) {
         $("#article-file-preview").empty();
         $("#article-file-reset").css("visibility", "visible");
         $(input.files).each(function () {
-            $("#article-file-preview").append("<p><img src=\'" + createObjectURL(this) + "\' /></p>");
+            var valid = this.type.match(/^image\//) && this.size <= textpattern.prefs.max_file_size,
+            img = valid ? "<img src=\'" + createObjectURL(this) + "\' />" : "<del>"+textpattern.encodeHTML(this.name)+"</del>";
+            $("#article-file-preview").append("<p>"+img+"</p>");
+
+            if (!valid)
+              textpattern.Console.addMessage(['<strong>'+textpattern.encodeHTML(this.name)+'</strong> - '+textpattern.gTxt('upload_err_form_size'), 1], 'comImageUpload');
         });
+        textpattern.Console.announce('comImageUpload');
     }
 }
 
@@ -470,7 +476,10 @@ EOJS
         $images = array();
         $select_images = '';
         $limit = intval(get_pref('com_article_image_limit')) or $limit = 12;
-
+/*
+        $paginator = new \Textpattern\Admin\Paginator('image');
+        $limit = $paginator->getLimit();
+*/
         $rows = safe_rows($fields, 'txp_image', ($ids ? 'id NOT IN('.$id_list.')' : '1').' ORDER BY date DESC LIMIT '.$limit);
 
         foreach ($rows as $row) {
