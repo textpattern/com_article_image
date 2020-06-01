@@ -420,7 +420,11 @@ EOJS
      */
     public function post_upload($evt, $stp, $rs)
     {
-        global $img_dir;
+        global $img_dir, $event;
+
+        if ($event !== 'article') {
+          return;
+        }
 
         $img = array_intersect_key($rs, array(
             'id'  => null,
