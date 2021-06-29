@@ -17,7 +17,7 @@ $plugin['name'] = 'com_article_image';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.1.0';
+$plugin['version'] = '0.1.1';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://github.com/textpattern';
 $plugin['description'] = 'Article image helper on the Textpattern Write panel';
@@ -112,7 +112,10 @@ class com_article_image
             register_callback(array($this, 'js'), 'admin_side', 'body_end');
         }
 
-        register_callback(array($this, 'post_upload'), 'site.update', 'image_uploaded');
+        if (gps('com') === 'article_image') {
+            register_callback(array($this, 'post_upload'), 'site.update', 'image_uploaded');
+        }
+
 
         $this->install();
     }
@@ -229,7 +232,7 @@ formData.append("_txp_token", textpattern._txp_token);
 $(input).prop("disabled", true);
 
 $.ajax({
-    url: "index.php?event=image&step=image_insert&app_mode=async",
+    url: "index.php?event=image&step=image_insert&app_mode=async&com=article_image",
     type: "POST",
     data: formData,
     async: true,
@@ -318,7 +321,8 @@ $("#txp-image-group-content").on("click", "#article-file-reset", function(e) {
         e.originalEvent.dataTransfer.setData("text/plain", text);
         e.originalEvent.dataTransfer.setData("text/html", "");
 }).on("sortupdate", function( event ) {
-    var myContainer = $("#article-file-container"), list = [];
+    var myContainer = $("#article-file-container"),
+        list = $("#article-image").val().split(",").filter(isNaN);//[];
     myContainer.children("p.sortable").each(function() {
         list.push($(this).data("id"));
     });
@@ -420,11 +424,7 @@ EOJS
      */
     public function post_upload($evt, $stp, $rs)
     {
-        global $img_dir, $event;
-
-        if ($event !== 'article') {
-          return;
-        }
+        global $img_dir;
 
         $img = array_intersect_key($rs, array(
             'id'  => null,
