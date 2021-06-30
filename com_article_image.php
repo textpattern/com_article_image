@@ -17,7 +17,7 @@ $plugin['name'] = 'com_article_image';
 // 1 = Plugin help is in raw HTML.  Not recommended.
 # $plugin['allow_html_help'] = 1;
 
-$plugin['version'] = '0.1.1';
+$plugin['version'] = '0.1.2';
 $plugin['author'] = 'Textpattern Community';
 $plugin['author_uri'] = 'https://github.com/textpattern';
 $plugin['description'] = 'Article image helper on the Textpattern Write panel';
@@ -130,7 +130,7 @@ class com_article_image
     {
         if ($stp == 'deleted') {
             // Remove predecessor abc_article_image prefs too.
-            safe_delete('txp_prefs', "name LIKE 'abc\_file\_%' AND name LIKE 'com\_article\_image\_%'");
+            safe_delete('txp_prefs', "name LIKE 'abc\_file\_%' OR name LIKE 'com\_article\_image\_%'");
         } elseif ($stp == 'installed') {
             safe_update('txp_prefs', "event='".$this->event."'", "name LIKE 'com\_article\_image\_%'");
 
