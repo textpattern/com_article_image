@@ -1,4 +1,0 @@
-h1. Overview
-
-Assists with article image management on the @Write@ panel.
-
