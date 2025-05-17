@@ -1,0 +1,10 @@
+#@prefs
+#@language en, en-gb, en-us
+com_article_image => Article image helper
+com_article_image_external => External image format
+com_article_image_internal => Internal image format
+com_article_image_limit => Number of images
+com_article_image_search => Image search fields
+#@article
+com_article_image_dropzone => Click or drop files on this zone
+instructions_article_image_select => Shift+Enter: invert search mode
