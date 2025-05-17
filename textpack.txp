@@ -8,3 +8,14 @@ com_article_image_search => Image search fields
 #@article
 com_article_image_dropzone => Click or drop files on this zone
 instructions_article_image_select => Shift+Enter: invert search mode
+
+#@language de
+#@prefs
+com_article_image => Artikelbild-Assistent
+com_article_image_external => Externes Bildformat
+com_article_image_internal => Internes Bildformat
+com_article_image_limit => Anzahl der Bilder
+com_article_image_search => Bildsuchfelder
+#@article
+com_article_image_dropzone => Klicken oder Dateien in diesen Bereich ziehen
+instructions_article_image_select => Umschalt+Eingabe: Suchmodus umkehren
